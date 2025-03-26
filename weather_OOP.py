@@ -40,7 +40,7 @@ class WeatherApp:
         self.temperature = None
 
     def get_coordinates(self):
-        """ Fetch latitude and longitude of self.city using API Ninjas."""
+        """Fetch latitude and longitude of self.city using API Ninjas."""
 
         url = f"https://api.api-ninjas.com/v1/geocoding?city={self.city}"
         params = {"city": self.city, "X-Api-Key": API_KEY}
@@ -82,33 +82,35 @@ class WeatherApp:
             data = response.json()
             self.temperature = data["current_weather"]["temperature"]
 
-    def suggest_clothing(self):
+    def pezhman_says(self):
         """Prints Pezhman's weather-based comments."""
         if self.temperature is None:
-            print("Error: No temperature data available.")
-            return
+            self.get_weather()
 
         if self.temperature < 0:
-            print("Pezhman says: 'F**king freezzzyyy! Stay at home! 🥶'")
+            print(f"\nPezhman says: 'Only {self.temperature}°C?! F**king freezzzyyy! Stay at home! 🥶'")
 
-        if self.temperature < 0:
-            print("Pezhman says: 'Dangerous ⚠️! You're gonna be sick 🤧🤒 and then you're gonna die 💀! "
+        elif 0 <= self.temperature < 10:
+            print(f"\nPezhman says: 'It's only {self.temperature}°C. Dangerous to go outside ⚠️! "
+                  f"You're gonna be sick 🤧🤒 and then you're gonna die 💀! "
                   "But don't worry, everybody dies ⚰️, so life is short—enjoy it! 😆'")
 
-        if 0 < self.temperature < 10:
-            print("Still too cold for Pezhman 🧥🧣🧤?")
+        elif 10 <= self.temperature < 15:
+            print(f"\nWith {self.temperature}°C it's still too cold for Pezhman 🧥🧣🧤?")
 
-        if 10 < self.temperature < 15:
-            print("Hmm, WWPD - what would Pezhman do or wear 🤔? Putting on a vintage barça jersey ⚽️ for sure...")
+        elif 15 <= self.temperature < 20:
+            print(f"\nHmm, we have {self.temperature}°C now. WWPD - "
+                  f"what would Pezhman do or wear 🤔? Putting on a vintage barça jersey ⚽️ for sure...")
 
-        if 15 < self.temperature < 20:
-            print("Are we approaching Pezhman's comfort zone⁉️")
+        elif 20 <= self.temperature < 25:
+            print(f"\nAre we approaching Pezhman's comfort zone with {self.temperature}°C⁉️")
 
-        if 20 < self.temperature < 35:
-            print("I guess Pezhman would like it here 😎, if there is a beach 🏝️🏖️ nearby...?!")
+        elif 25 <= self.temperature < 35:
+            print(f"\nI guess Pezhman would like it here 😎 with {self.temperature}°C, "
+                  f"if there is a beach 🏝️🏖️ nearby...?!")
 
-        if self.temperature > 35:
-            print("Welcome to hell 🔥 or a very hot place on earth 🥵 or it's just global warming 🌎🌡️.")
+        else:
+            print("\nWelcome to hell 🔥 or a very hot place on earth 🥵 or it's just global warming 🌎🌡️.")
 
     def display_weather_info(self):
         """Print weather details (in our case only temperature) that we got from get_weather function"""
