@@ -1,3 +1,6 @@
 .env
 __pycache__/
 *.pyc
+# Ignore database and CSV export
+weather.db
+weather_history.csv
