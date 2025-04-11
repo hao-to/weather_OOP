@@ -6,6 +6,7 @@ Users can enter a city name and interact with a small terminal menu to:
 - 🌍 Get the current weather  
 - 🧭 View geographic coordinates  
 - 🧥 Hear what Pezhman says about the weather (with a sense of humor)
+- 📅 See the 7-day forecast 
 - 💾 Save weather data to a database
 - 📤 Export saved weather history to a CSV file
 

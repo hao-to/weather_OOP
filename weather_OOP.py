@@ -115,3 +115,32 @@ class WeatherApp:
     def display_weather_info(self):
         """Print weather details (in our case only temperature) that we got from get_weather function"""
         print(f"\n🌡️ The temperature in {self.city.title()} is: {self.temperature}°C\n")
+
+    def show_7_day_forecast(self):
+        """Fetches 7-day weather forecast using Open-Meteo API."""
+        if self.lat is None or self.lon is None:
+            print("Error: Cannot get forecast without coordinates.")
+            return
+
+        url = "https://api.open-meteo.com/v1/forecast"
+        params = {
+            "latitude": self.lat,
+            "longitude": self.lon,
+            "daily": "temperature_2m_max,temperature_2m_min",
+            "timezone": "auto"
+        }
+
+        response = requests.get(url, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            dates = data["daily"]["time"]
+            temps_max = data["daily"]["temperature_2m_max"]
+            temps_min = data["daily"]["temperature_2m_min"]
+
+            print(f"\n📅 7-Day Forecast for {self.city.title()}:\n")
+            for date, t_min, t_max in zip(dates, temps_min, temps_max):
+                print(f"{date}: Min. Temperature is: {t_min}°C – Max. Temperature is: {t_max}°C")
+        else:
+            print("Error: Could not retrieve forecast data.")
+
