@@ -9,6 +9,8 @@ Users can enter a city name and interact with a small terminal menu to:
 - 📅 See the 7-day forecast 
 - 💾 Save weather data to a database
 - 📤 Export saved weather history to a CSV file
+- 🤖 Optional: Get clothing advice from OpenAI (requires your own API key)
+
 
 ---
 
@@ -62,3 +64,16 @@ pip install -r requirements.txt
 - Add weather forecast for the next few days  
 - Switch between Celsius and Fahrenheit  
 - Maybe even build a GUI version one day
+
+## ⚠️ Important Notice about OpenAI API Usage
+
+This project includes an optional feature to get clothing advice from OpenAI's GPT model.  
+To use it, you must:
+
+- Create an OpenAI account at [https://platform.openai.com/signup](https://platform.openai.com/signup)
+- Add a valid payment method
+- Generate an API key and save it in your `.env` file as:
+
+```env
+OPENAI_API_KEY=your_openai_key_here
+```
