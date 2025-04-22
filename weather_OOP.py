@@ -1,12 +1,16 @@
 import requests
 from dotenv import load_dotenv
 import os
+from openai import OpenAI
+
 
 # Load .env file
 load_dotenv()
 
 # Retrieve API key
 API_KEY = os.getenv("API_KEY")
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 def select_location(locations):
@@ -40,7 +44,7 @@ class WeatherApp:
         self.temperature = None
 
     def get_coordinates(self):
-        """Fetch latitude and longitude of self.city using API Ninjas."""
+        """ Fetch latitude and longitude of self.city using API Ninjas."""
 
         url = f"https://api.api-ninjas.com/v1/geocoding?city={self.city}"
         params = {"city": self.city, "X-Api-Key": API_KEY}
@@ -143,4 +147,27 @@ class WeatherApp:
                 print(f"{date}: Min. Temperature is: {t_min}°C – Max. Temperature is: {t_max}°C")
         else:
             print("Error: Could not retrieve forecast data.")
+
+    def ask_openai_clothing(self):
+        """Ask OpenAI for clothing suggestion based on temperature."""
+        if self.temperature is None:
+            self.get_weather()
+
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+        messages = [
+            {"role": "system", "content": "You are a funny, sarcastic and maybe helpful clothing assistant."},
+            {"role": "user", "content": f"It's {self.temperature}°C. I'm a complete moron and can't think for myself. "
+                                        f"Tell me what to wear or do today!"}
+        ]
+
+        try:
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=messages
+            )
+            print(f"\n🤖 OpenAI says:\n{response.choices[0].message.content}\n")
+        except Exception as e:
+            print(f"⚠️ Error fetching OpenAI response: {e}")
+
 
