@@ -26,9 +26,10 @@ while True:
     print("4. Save current weather to database 🗃️")
     print("5. Export all saved data to CSV 📄")
     print("6. Show 7-Day Forecast 📅")
-    print("7. Exit")
+    print("7. Get clothing advice from OpenAI 🤖")
+    print("8. Exit")
 
-    choice = input("Select an option (1–7): ").strip()
+    choice = input("Select an option (1–8): ").strip()
 
     if choice == "1":
         app.get_weather()
@@ -50,7 +51,11 @@ while True:
         print("✅ Data exported to 'weather_history.csv'.")
     elif choice == "6":
         app.show_7_day_forecast()
+
     elif choice == "7":
+        app.ask_openai_clothing()
+
+    elif choice == "8":
         print("\nExiting WeatherApp. Goodbye!")
         break
 
