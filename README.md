@@ -61,9 +61,9 @@ pip install -r requirements.txt
 
 ## 🗺️ Next Steps (Maybe)
 
-- Add weather forecast for the next few days  
 - Switch between Celsius and Fahrenheit  
 - Maybe even build a GUI version one day
+- Improve clothing suggestions with even funnier prompts 😄👕
 
 ## ⚠️ Important Notice about OpenAI API Usage
 
